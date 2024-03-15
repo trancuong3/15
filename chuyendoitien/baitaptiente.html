@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+
+<form>
+    <b><h2>Amount</h2></b>
+    <input type="text" id="amount">
+
+    <b><h2 id="fromCurrency">From Currency</h2></b>
+    <select id="fromCurrencySelect">
+        <option value="VND">VND</option>
+        <option value="USD">USD</option>
+    </select>
+    <b><h2 id="toCurrency">To Currency</h2></b>
+    <select id="toCurrencySelect">
+        <option value="VND">VND</option>
+        <option value="USD">USD</option>
+    </select>
+    <button type="button" onclick="convertCurrency()">Convert</button>
+    <p id="result"></p>
+</form>
+
+<script>
+    function convertCurrency() {
+        let amount = parseFloat(document.getElementById("amount").value);
+        let fromCurrency = document.getElementById("fromCurrencySelect").value;
+        let toCurrency = document.getElementById("toCurrencySelect").value;
+
+        const exchangeRates = {
+            "VND_TO_USD": 0.000043,
+            "USD_TO_VND": 23125
+        };
+
+        let result;
+
+        if (fromCurrency === "VND" && toCurrency === "USD") {
+            result = amount * exchangeRates["VND_TO_USD"];
+        }
+        else if (fromCurrency === "USD" && toCurrency === "VND") {
+            result = amount * exchangeRates["USD_TO_VND"];
+        }
+        else if (fromCurrency === toCurrency) {
+            result = amount;
+        }
+
+
+        document.getElementById("result").innerHTML = result;
+    }
+</script>
+
+</body>
+</html>
